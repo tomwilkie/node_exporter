@@ -47,7 +47,7 @@ type mdStatus struct {
 type mdadmCollector struct{}
 
 func init() {
-	registerCollector("mdadm", defaultEnabled, NewMdadmCollector)
+	registerCollector("mdadm", defaultDisabled, NewMdadmCollector)
 }
 
 func evalStatusline(statusline string) (active, total, size int64, err error) {

@@ -36,7 +36,7 @@ var pageSize = os.Getpagesize()
 type sockStatCollector struct{}
 
 func init() {
-	registerCollector(sockStatSubsystem, defaultEnabled, NewSockStatCollector)
+	registerCollector(sockStatSubsystem, defaultDisabled, NewSockStatCollector)
 }
 
 // NewSockStatCollector returns a new Collector exposing socket stats.

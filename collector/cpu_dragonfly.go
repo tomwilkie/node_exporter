@@ -88,7 +88,7 @@ type statCollector struct {
 }
 
 func init() {
-	registerCollector("cpu", defaultEnabled, NewStatCollector)
+	registerCollector("cpu", defaultDisabled, NewStatCollector)
 }
 
 // NewStatCollector returns a new Collector exposing CPU stats.

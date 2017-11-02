@@ -26,7 +26,7 @@ type entropyCollector struct {
 }
 
 func init() {
-	registerCollector("entropy", defaultEnabled, NewEntropyCollector)
+	registerCollector("entropy", defaultDisabled, NewEntropyCollector)
 }
 
 // NewEntropyCollector returns a new Collector exposing entropy stats.

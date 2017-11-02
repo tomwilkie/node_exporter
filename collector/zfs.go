@@ -29,7 +29,7 @@ var errZFSNotAvailable = errors.New("ZFS / ZFS statistics are not available")
 type zfsSysctl string
 
 func init() {
-	registerCollector("zfs", defaultEnabled, NewZFSCollector)
+	registerCollector("zfs", defaultDisabled, NewZFSCollector)
 }
 
 type zfsCollector struct {

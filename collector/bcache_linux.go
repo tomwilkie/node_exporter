@@ -25,7 +25,7 @@ import (
 )
 
 func init() {
-	registerCollector("bcache", defaultEnabled, NewBcacheCollector)
+	registerCollector("bcache", defaultDisabled, NewBcacheCollector)
 }
 
 // A bcacheCollector is a Collector which gathers metrics from Linux bcache.
