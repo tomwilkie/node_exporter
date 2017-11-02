@@ -127,6 +127,7 @@ func (n nodeCollector) Collect(ch chan<- prometheus.Metric) {
 }
 
 func execute(name string, c Collector, ch chan<- prometheus.Metric) {
+	log.Debugf("START: %s collector starting.", name)
 	begin := time.Now()
 	err := c.Update(ch)
 	duration := time.Since(begin)

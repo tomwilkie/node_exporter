@@ -61,6 +61,7 @@ func cleanMetricName(name string) string {
 }
 
 func addValueFile(data map[string]map[string]string, sensor string, prop string, file string) {
+	log.Debugf("Reading file %q", file)
 	raw, e := ioutil.ReadFile(file)
 	if e != nil {
 		return
@@ -102,6 +103,7 @@ func explodeSensorFilename(filename string) (ok bool, sensorType string, sensorN
 }
 
 func collectSensorData(dir string, data map[string]map[string]string) error {
+	log.Debugf("Reading directory %q", dir)
 	sensorFiles, dirError := ioutil.ReadDir(dir)
 	if dirError != nil {
 		return dirError
@@ -345,7 +347,9 @@ func (c *hwMonCollector) hwmonName(dir string) (string, error) {
 	}
 
 	// preference 2: is there a name file
-	sysnameRaw, nameErr := ioutil.ReadFile(path.Join(dir, "name"))
+	nameFile := path.Join(dir, "name")
+	log.Debugf("Reading file %q", nameFile)
+	sysnameRaw, nameErr := ioutil.ReadFile(nameFile)
 	if nameErr == nil && string(sysnameRaw) != "" {
 		cleanName := cleanMetricName(string(sysnameRaw))
 		if cleanName != "" {
@@ -373,7 +377,9 @@ func (c *hwMonCollector) hwmonName(dir string) (string, error) {
 // hwmonHumanReadableChipName is similar to the methods in hwmonName, but with
 // different precedences -- we can allow duplicates here.
 func (c *hwMonCollector) hwmonHumanReadableChipName(dir string) (string, error) {
-	sysnameRaw, nameErr := ioutil.ReadFile(path.Join(dir, "name"))
+	nameFile := path.Join(dir, "name")
+	log.Debugf("Reading file %q", nameFile)
+	sysnameRaw, nameErr := ioutil.ReadFile(nameFile)
 	if nameErr != nil {
 		return "", nameErr
 	}
@@ -394,6 +400,7 @@ func (c *hwMonCollector) Update(ch chan<- prometheus.Metric) error {
 
 	hwmonPathName := path.Join(sysFilePath("class"), "hwmon")
 
+	log.Debugf("Reading directory %q", hwmonPathName)
 	hwmonFiles, err := ioutil.ReadDir(hwmonPathName)
 	if err != nil {
 		if os.IsNotExist(err) {
