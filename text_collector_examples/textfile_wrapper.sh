@@ -48,6 +48,10 @@ if [[ $? -ne 0 || ! -w "${tmpfile}" ]]; then
   exit 1
 fi
 
+if [[ "${output_file}" != *.prom ]] ; then
+  output_file="${output_file}.prom"
+fi
+
 ${script} > "${tmpfile}"
 
-mv "${tmpfile}" "${output_file}.prom"
+mv -f "${tmpfile}" "${output_file}"
