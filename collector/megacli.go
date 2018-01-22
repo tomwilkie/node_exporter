@@ -60,7 +60,7 @@ func NewMegaCliCollector() (Collector, error) {
 		}, []string{"enclosure", "slot"}),
 		driveCounters: prometheus.NewGaugeVec(prometheus.GaugeOpts{
 			Namespace: namespace,
-			Name:      "megacli_drive_count",
+			Name:      "megacli_drive_events",
 			Help:      "megacli: drive error and event counters",
 		}, []string{"enclosure", "slot", "type"}),
 		drivePresence: prometheus.NewGaugeVec(prometheus.GaugeOpts{
